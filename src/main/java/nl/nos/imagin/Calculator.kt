@@ -1,6 +1,7 @@
 package nl.nos.imagin
 
 import android.widget.ImageView
+import kotlin.math.max
 
 /**
  * @author mennovogel (22/02/2019).
@@ -10,7 +11,7 @@ class Calculator {
             scale: Float,
             imageSize: Int,
             imageViewSize: Int
-    ) = Math.max(0f, (scale * imageSize - imageViewSize) / 2)
+    ) = max(0f, (scale * imageSize - imageViewSize) / 2)
 
     fun calculateImageSize(imageView: ImageView): Pair<Int, Int>? {
         if (imageView.drawable == null) return null
