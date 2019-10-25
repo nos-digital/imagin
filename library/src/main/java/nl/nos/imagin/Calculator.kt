@@ -3,9 +3,6 @@ package nl.nos.imagin
 import android.widget.ImageView
 import kotlin.math.max
 
-/**
- * @author mennovogel (22/02/2019).
- */
 class Calculator {
     fun calculateMaxTranslation(
             scale: Float,
