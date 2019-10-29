@@ -4,6 +4,8 @@ Imagin is an Android library, written in Kotlin. It attaches to an ImageView and
 
 This library is currently supported on Android 5.1 Lollipop (22) and higher. 
 
+![](https://github.com/nos-digital/imagin/preview.gif)
+
 ## Usage
 
 1. Add the Imagin library to your `build.gradle` file:
