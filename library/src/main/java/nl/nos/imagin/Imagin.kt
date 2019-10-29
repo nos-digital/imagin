@@ -58,7 +58,7 @@ class Imagin private constructor(
     }
 
     /**
-     * Allow the user to move the image of the image view when zoomed in.
+     * Allow the user to move the image when zoomed in.
      *
      * @param allowScrollOutOfBoundsHorizontally Whether or not the image can be placed out of
      * it's bounds horizontally.
