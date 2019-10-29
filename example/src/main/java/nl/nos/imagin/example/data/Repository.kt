@@ -5,6 +5,6 @@ class Repository {
         Picture("Mountains", "Mountains.jpg"),
         Picture("Sunset", "Sunset.jpg"),
         Picture("Shanghai", "Shanghai.jpg"),
-        Picture("Dolfin", "Dolfin.jpg")
+        Picture("Dolphin", "Dolphin.jpg")
     )
 }
