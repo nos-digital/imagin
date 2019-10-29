@@ -10,17 +10,17 @@ This library is currently supported on Android 5.1 Lollipop (22) and higher.
 
 1. Add the Imagin library to your `build.gradle` file:
 
-   ```gradle
-   dependencies {
-       implementation("nl.nos.imagin:${imagin.version}")
-   }
-   ```
+```gradle
+dependencies {
+    implementation("nl.nos.imagin:${imagin.version}")
+}
+```
 
 2. Usage in your project:
 
     Load an image into an ImageView like usual.
 
-   ```kotlin
+```kotlin
 Imagin.with(imageWrapper, imageView)
     // enable double tap to zoom functionality
     .enableDoubleTapToZoom()
@@ -40,7 +40,7 @@ Imagin.with(imageWrapper, imageView)
     ) {
         onSwipedToCloseListener?.onSwipeToClose()
     }
-   ```
+```
 
 ## Licence
 
