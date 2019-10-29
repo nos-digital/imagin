@@ -1,6 +1,6 @@
 # Imagin
 
-Imagin is an Android library, written in Kotlin. It attaches to an ImageView and allows you to add 'pinch to zoom', 'swipe to close', 'double tap to zoom' and dragging functionality. 
+Imagin is an Android library, written in Kotlin. It attaches to an ImageView and allows you to add 'pinch to zoom', 'swipe to close', 'double tap to zoom' and dragging functionality. Because it attaches to a regular ImageView, it allows you to use all existing functionality of the ImageView or extend the ImageView to add extra functionality. Keep in mind that Imagin sets an OnTouchListener on the ImageView.
 
 ## Usage
 
