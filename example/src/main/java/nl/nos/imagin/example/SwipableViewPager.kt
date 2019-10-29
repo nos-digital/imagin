@@ -6,6 +6,9 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.ImageView
 
+/**
+ * This ViewPager allows us to move a zoomed-in image to the edge, before we move to the next page.
+ */
 class SwipableViewPager : ViewPager {
 
     constructor(context: Context) : super(context)
