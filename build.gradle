@@ -1,43 +1,28 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
 buildscript {
+    ext.kotlin_version = '1.3.50'
     repositories {
-        mavenCentral()
+        google()
+        jcenter()
+
     }
     dependencies {
+        classpath 'com.android.tools.build:gradle:3.5.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
     }
 }
 
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+allprojects {
+    repositories {
+        google()
+        jcenter()
 
-android {
-    compileSdkVersion compileVersion
-
-    defaultConfig {
-        minSdkVersion minVersion
-        targetSdkVersion targetVersion
-        versionCode 1
-        versionName "1.0"
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-    buildTypes {
-        debug {}
-        staging {
-            matchingFallbacks = ['release']
-        }
-        release {}
     }
 }
 
-dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-
-    // Test dependencies
-    testImplementation 'junit:junit:4.12'
-    testImplementation 'org.mockito:mockito-core:2.8.9'
+task clean(type: Delete) {
+    delete rootProject.buildDir
 }
