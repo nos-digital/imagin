@@ -11,8 +11,15 @@ This library is currently supported on Android 5.1 Lollipop (22) and higher.
 1. Add the Imagin library to your `build.gradle` file:
 
 ```gradle
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+
 dependencies {
-    implementation("nl.nos.imagin:${imagin.version}")
+    implementation 'com.github.nos-digital:imagin:${imagin.version}'
 }
 ```
 
