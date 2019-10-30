@@ -54,6 +54,7 @@ class GalleryPagerAdapter : PagerAdapter() {
             }
 
         imageView.transitionName = picture.name
+        imageView.tag = picture.name
 
         container.addView(imageWrapper)
 

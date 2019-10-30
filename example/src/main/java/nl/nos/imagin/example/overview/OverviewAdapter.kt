@@ -28,6 +28,7 @@ class OverviewAdapter : RecyclerView.Adapter<PictureViewHolder>() {
         )
 
         viewHolder.itemView.transitionName = picture.name
+        viewHolder.itemView.tag = picture.name
 
         viewHolder.itemView.setOnClickListener {
             onPictureClickedListener?.onPictureClicked(viewHolder.itemView, picture, position)
