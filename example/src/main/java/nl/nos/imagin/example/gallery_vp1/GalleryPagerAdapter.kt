@@ -1,8 +1,8 @@
-package nl.nos.imagin.example.gallery
+package nl.nos.imagin.example.gallery_vp1
 
 import android.content.Context
 import android.graphics.Rect
-import android.support.v4.view.PagerAdapter
+import androidx.viewpager.widget.PagerAdapter
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View

@@ -18,7 +18,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".gallery.GalleryActivity" />
+        <activity android:name="nl.nos.imagin.example.gallery_vp1.GalleryActivity" />
+
+        <activity android:name="nl.nos.imagin.example.gallery_vp2.GalleryActivity" />
 
     </application>
 
