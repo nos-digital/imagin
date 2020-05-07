@@ -53,11 +53,7 @@ class GalleryActivity : AppCompatActivity() {
         val fragments = mutableListOf<Fragment>()
 
         repository.getPictures().forEach {
-            fragments.add(
-                GalleryImageFragment.newInstance(
-                    it
-                )
-            )
+            fragments.add(GalleryImageFragment.newInstance(it))
         }
 
         view_pager?.apply {

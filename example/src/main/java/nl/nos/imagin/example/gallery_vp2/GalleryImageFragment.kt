@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.gallery_item.*
+import kotlinx.android.synthetic.main.gallery_item_vp2.*
 import nl.nos.imagin.Imagin
 import nl.nos.imagin.SingleTapHandler
 import nl.nos.imagin.example.AssetLoader
@@ -33,9 +33,7 @@ class GalleryImageFragment : Fragment(), SingleTapHandler.OnSingleTapListener {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.gallery_item, container, false)
-    }
+    ): View = inflater.inflate(R.layout.gallery_item_vp2, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -48,7 +46,7 @@ class GalleryImageFragment : Fragment(), SingleTapHandler.OnSingleTapListener {
     private fun loadImage(picture: Picture) {
         image_view.setImageDrawable(
             assetLoader.createDrawableFromAsset(
-                image_wrapper.resources,
+                image_view.resources,
                 picture.fileName
             )
         )
@@ -59,7 +57,7 @@ class GalleryImageFragment : Fragment(), SingleTapHandler.OnSingleTapListener {
     private fun enableImageZoomControls(picture: Picture) {
         view?.let {
             Imagin.with(it, image_view)
-                .enableDoubleTapToZoom()
+                .enableDoubleTapToZoom() // FIXME only works if enablePinchToZoom is also added to builder
                 .enablePinchToZoom()
                 .enableSingleTap(object : SingleTapHandler.OnSingleTapListener {
                     override fun onSingleTap() {
@@ -67,7 +65,7 @@ class GalleryImageFragment : Fragment(), SingleTapHandler.OnSingleTapListener {
                     }
                 })
                 .enableScroll(
-                    allowScrollOutOfBoundsHorizontally = false,
+                    allowScrollOutOfBoundsHorizontally = true,
                     allowScrollOutOfBoundsVertically = true,
                     scrollDistanceToCloseInPx = getScreenHeight(image_view.context) / 5
                 ) {
