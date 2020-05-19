@@ -30,9 +30,14 @@ class ScrollHandler(
 
     private val gestureDetector = GestureDetector(imageView.context,
             object : GestureDetector.SimpleOnGestureListener() {
-                override fun onLongPress(e: MotionEvent) {}
 
                 override fun onScroll(e1: MotionEvent?, e2: MotionEvent?, distanceX: Float, distanceY: Float): Boolean {
+                    if (imageView.rightEdgeIsVisible() && distanceX > 0) {
+                        imageView.parent?.requestDisallowInterceptTouchEvent(false)
+                    } else if (imageView.leftEdgeIsVisible() && distanceX < 0) {
+                        imageView.parent?.requestDisallowInterceptTouchEvent(false)
+                    }
+
                     imageView.translationX -= distanceX
                     imageView.translationY -= distanceY
 
@@ -59,8 +64,21 @@ class ScrollHandler(
                 }
             })
 
+    private fun ImageView.leftEdgeIsVisible(): Boolean {
+        val maxTranslationXScale = (scaleX * width - width) / 2
+        return translationX >= maxTranslationXScale
+    }
+
+    private fun ImageView.rightEdgeIsVisible(): Boolean {
+        val maxTranslationXScale = (scaleX * width - width) / 2
+        return translationX <= -maxTranslationXScale
+    }
+
     override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+        imageView.parent?.requestDisallowInterceptTouchEvent(true)
+
         val consumed = gestureDetector.onTouchEvent(event)
+
 
         if (event?.action == MotionEvent.ACTION_UP || event?.action == MotionEvent.ACTION_CANCEL) {
             val imageSize = calculator.calculateImageSize(imageView) ?: return consumed
@@ -112,7 +130,7 @@ class ScrollHandler(
             }
         }
 
-        return consumed
+        return false
     }
 
     private fun calculateNewTranslation(

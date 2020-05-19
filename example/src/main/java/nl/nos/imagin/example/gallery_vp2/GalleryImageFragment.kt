@@ -65,7 +65,7 @@ class GalleryImageFragment : Fragment(), SingleTapHandler.OnSingleTapListener {
                     }
                 })
                 .enableScroll(
-                    allowScrollOutOfBoundsHorizontally = true,
+                    allowScrollOutOfBoundsHorizontally = false,
                     allowScrollOutOfBoundsVertically = true,
                     scrollDistanceToCloseInPx = getScreenHeight(image_view.context) / 5
                 ) {
