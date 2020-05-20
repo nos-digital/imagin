@@ -57,7 +57,7 @@ class GalleryImageFragment : Fragment(), SingleTapHandler.OnSingleTapListener {
     private fun enableImageZoomControls(picture: Picture) {
         view?.let {
             Imagin.with(it, image_view)
-                .enableDoubleTapToZoom() // FIXME only works if enablePinchToZoom is also added to builder
+                .enableDoubleTapToZoom()
                 .enablePinchToZoom()
                 .enableSingleTap(object : SingleTapHandler.OnSingleTapListener {
                     override fun onSingleTap() {
