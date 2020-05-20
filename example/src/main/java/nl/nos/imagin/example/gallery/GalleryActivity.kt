@@ -1,4 +1,4 @@
-package nl.nos.imagin.example.gallery_vp2
+package nl.nos.imagin.example.gallery
 
 import android.content.Context
 import android.content.Intent
@@ -10,7 +10,7 @@ import android.view.animation.DecelerateInterpolator
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
-import kotlinx.android.synthetic.main.activity_gallery_vp2.*
+import kotlinx.android.synthetic.main.activity_gallery.*
 import nl.nos.imagin.example.data.Repository
 import nl.nos.imagin.example.R
 
@@ -21,7 +21,7 @@ class GalleryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_gallery_vp2)
+        setContentView(R.layout.activity_gallery)
 
         window.sharedElementEnterTransition.interpolator = DecelerateInterpolator(3f)
         supportPostponeEnterTransition()

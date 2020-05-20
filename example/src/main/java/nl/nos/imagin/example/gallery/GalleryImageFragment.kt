@@ -1,4 +1,4 @@
-package nl.nos.imagin.example.gallery_vp2
+package nl.nos.imagin.example.gallery
 
 import android.content.Context
 import android.graphics.Rect
@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.gallery_item_vp2.*
+import kotlinx.android.synthetic.main.gallery_item.*
 import nl.nos.imagin.Imagin
 import nl.nos.imagin.SingleTapHandler
 import nl.nos.imagin.example.AssetLoader
@@ -33,7 +33,7 @@ class GalleryImageFragment : Fragment(), SingleTapHandler.OnSingleTapListener {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = inflater.inflate(R.layout.gallery_item_vp2, container, false)
+    ): View = inflater.inflate(R.layout.gallery_item, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

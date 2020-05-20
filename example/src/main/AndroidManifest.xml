@@ -20,7 +20,7 @@
 
         <activity android:name="nl.nos.imagin.example.gallery_vp1.GalleryActivity" />
 
-        <activity android:name="nl.nos.imagin.example.gallery_vp2.GalleryActivity" />
+        <activity android:name="nl.nos.imagin.example.gallery.GalleryActivity" />
 
     </application>
 

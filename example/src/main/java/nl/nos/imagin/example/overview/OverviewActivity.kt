@@ -9,7 +9,7 @@ import android.view.View
 import kotlinx.android.synthetic.main.activity_overview.*
 import nl.nos.imagin.example.data.Picture
 import nl.nos.imagin.example.data.Repository
-import nl.nos.imagin.example.gallery_vp2.GalleryActivity
+import nl.nos.imagin.example.gallery.GalleryActivity
 
 class OverviewActivity : AppCompatActivity(),
     OverviewAdapter.OnPictureClickedListener {

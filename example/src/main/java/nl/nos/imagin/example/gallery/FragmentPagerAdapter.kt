@@ -1,4 +1,4 @@
-package nl.nos.imagin.example.gallery_vp2
+package nl.nos.imagin.example.gallery
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
