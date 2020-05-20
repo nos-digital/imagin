@@ -1,6 +1,5 @@
 package nl.nos.imagin
 
-import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
@@ -32,10 +31,15 @@ class ScrollHandler(
     private val gestureDetector = GestureDetector(imageView.context,
             object : GestureDetector.SimpleOnGestureListener() {
 
-                override fun onScroll(e1: MotionEvent?, e2: MotionEvent?, distanceX: Float, distanceY: Float): Boolean {
-                    if (imageView.rightEdgeIsVisible() && distanceX > 0) {
+                override fun onScroll(
+                    firstMotionEvent: MotionEvent,
+                    moveMotionEvent: MotionEvent,
+                    distanceX: Float,
+                    distanceY: Float
+                ): Boolean {
+                    if (imageView.rightEdgeIsVisible() && distanceX > 0 && moveMotionEvent.pointerCount == 1) {
                         imageView.parent?.requestDisallowInterceptTouchEvent(false)
-                    } else if (imageView.leftEdgeIsVisible() && distanceX < 0) {
+                    } else if (imageView.leftEdgeIsVisible() && distanceX < 0 && moveMotionEvent.pointerCount == 1) {
                         imageView.parent?.requestDisallowInterceptTouchEvent(false)
                     }
 
@@ -61,7 +65,7 @@ class ScrollHandler(
                         )
                     }
 
-                    return super.onScroll(e1, e2, distanceX, distanceY)
+                    return super.onScroll(firstMotionEvent, moveMotionEvent, distanceX, distanceY)
                 }
             })
 
