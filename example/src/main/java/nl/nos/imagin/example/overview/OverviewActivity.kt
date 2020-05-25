@@ -1,17 +1,18 @@
 package nl.nos.imagin.example.overview
 
 import android.os.Bundle
-import android.support.v4.app.ActivityOptionsCompat
-import android.support.v4.app.SharedElementCallback
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.GridLayoutManager
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.app.SharedElementCallback
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
 import android.view.View
 import kotlinx.android.synthetic.main.activity_overview.*
 import nl.nos.imagin.example.data.Picture
 import nl.nos.imagin.example.data.Repository
 import nl.nos.imagin.example.gallery.GalleryActivity
 
-class OverviewActivity : AppCompatActivity(), OverviewAdapter.OnPictureClickedListener {
+class OverviewActivity : AppCompatActivity(),
+    OverviewAdapter.OnPictureClickedListener {
 
     private val repository = Repository()
     private val adapter = OverviewAdapter().apply {
