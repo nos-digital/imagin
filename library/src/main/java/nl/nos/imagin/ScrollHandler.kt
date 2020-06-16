@@ -32,14 +32,14 @@ class ScrollHandler(
             object : GestureDetector.SimpleOnGestureListener() {
 
                 override fun onScroll(
-                    firstMotionEvent: MotionEvent,
-                    moveMotionEvent: MotionEvent,
+                    firstMotionEvent: MotionEvent?,
+                    moveMotionEvent: MotionEvent?,
                     distanceX: Float,
                     distanceY: Float
                 ): Boolean {
-                    if (imageView.rightEdgeIsVisible() && distanceX > 0 && moveMotionEvent.pointerCount == 1) {
+                    if (imageView.rightEdgeIsVisible() && distanceX > 0 && moveMotionEvent?.pointerCount == 1) {
                         imageView.parent?.requestDisallowInterceptTouchEvent(false)
-                    } else if (imageView.leftEdgeIsVisible() && distanceX < 0 && moveMotionEvent.pointerCount == 1) {
+                    } else if (imageView.leftEdgeIsVisible() && distanceX < 0 && moveMotionEvent?.pointerCount == 1) {
                         imageView.parent?.requestDisallowInterceptTouchEvent(false)
                     }
 
@@ -80,12 +80,13 @@ class ScrollHandler(
     }
 
     override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+        if (event == null) return false
+
         imageView.parent?.requestDisallowInterceptTouchEvent(true)
 
         val consumed = gestureDetector.onTouchEvent(event)
 
-
-        if (event?.action == MotionEvent.ACTION_UP || event?.action == MotionEvent.ACTION_CANCEL) {
+        if (event.action == MotionEvent.ACTION_UP || event.action == MotionEvent.ACTION_CANCEL) {
             val imageSize = calculator.calculateImageSize(imageView) ?: return consumed
 
             if (allowScrollOutOfBoundsHorizontally && shouldTriggerOutOfBoundListener(
