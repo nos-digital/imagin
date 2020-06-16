@@ -40,7 +40,11 @@ class Imagin private constructor(
                 )
         )
         touchListeners.add { _, event ->
-            scaleDetector.onTouchEvent(event)
+            if (event != null) {
+                scaleDetector.onTouchEvent(event)
+            } else {
+                false
+            }
         }
         return this
     }
