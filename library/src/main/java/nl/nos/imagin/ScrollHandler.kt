@@ -80,12 +80,14 @@ class ScrollHandler(
     }
 
     override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+        if (event == null) return false
+
         imageView.parent?.requestDisallowInterceptTouchEvent(true)
 
         val consumed = gestureDetector.onTouchEvent(event)
 
 
-        if (event?.action == MotionEvent.ACTION_UP || event?.action == MotionEvent.ACTION_CANCEL) {
+        if (event.action == MotionEvent.ACTION_UP || event.action == MotionEvent.ACTION_CANCEL) {
             val imageSize = calculator.calculateImageSize(imageView) ?: return consumed
 
             if (allowScrollOutOfBoundsHorizontally && shouldTriggerOutOfBoundListener(

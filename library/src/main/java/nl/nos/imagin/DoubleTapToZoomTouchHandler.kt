@@ -122,7 +122,11 @@ class DoubleTapToZoomTouchHandler(
             }
     )
 
-    override fun onTouch(v: View?, event: MotionEvent?) = gestureDetector.onTouchEvent(event)
+    override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+        if (event == null) return false
+
+        return gestureDetector.onTouchEvent(event)
+    }
 
     companion object {
         var isAnimating = false
