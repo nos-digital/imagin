@@ -16,7 +16,7 @@ class SingleTapHandler(
 
     private val tapListener = object : GestureDetector.OnDoubleTapListener {
         override fun onSingleTapConfirmed(e: MotionEvent): Boolean {
-            onSingleTapListener.onSingleTap()
+            onSingleTapListener.onSingleTap(e)
             return false
         }
 
@@ -42,7 +42,7 @@ class SingleTapHandler(
         /**
          * The view has been tapped
          */
-        fun onSingleTap()
+        fun onSingleTap(event: MotionEvent)
     }
 }
 
