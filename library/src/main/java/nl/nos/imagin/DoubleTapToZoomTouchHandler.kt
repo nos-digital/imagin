@@ -22,6 +22,10 @@ class DoubleTapToZoomTouchHandler(
             object : GestureDetector.SimpleOnGestureListener() {
                 override fun onLongPress(e: MotionEvent) {}
 
+                override fun onDown(e: MotionEvent?): Boolean {
+                    return true
+                }
+
                 override fun onDoubleTap(e: MotionEvent): Boolean {
                     // Zoom to minZoom if the current scale is already fully zoomed in, else zoom to the
                     // maxZoom value.
@@ -118,7 +122,11 @@ class DoubleTapToZoomTouchHandler(
             }
     )
 
-    override fun onTouch(v: View?, event: MotionEvent?) = gestureDetector.onTouchEvent(event)
+    override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+        if (event == null) return false
+
+        return gestureDetector.onTouchEvent(event)
+    }
 
     companion object {
         var isAnimating = false

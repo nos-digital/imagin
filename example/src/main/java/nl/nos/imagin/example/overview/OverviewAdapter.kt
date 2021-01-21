@@ -1,6 +1,6 @@
 package nl.nos.imagin.example.overview
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import nl.nos.imagin.example.AssetLoader
@@ -13,7 +13,8 @@ class OverviewAdapter : RecyclerView.Adapter<PictureViewHolder>() {
     val pictures = mutableListOf<Picture>()
     var onPictureClickedListener: OnPictureClickedListener? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = PictureViewHolder(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        PictureViewHolder(parent)
 
     override fun getItemCount() = pictures.size
 
@@ -28,6 +29,7 @@ class OverviewAdapter : RecyclerView.Adapter<PictureViewHolder>() {
         )
 
         viewHolder.itemView.transitionName = picture.name
+        viewHolder.itemView.tag = picture.name
 
         viewHolder.itemView.setOnClickListener {
             onPictureClickedListener?.onPictureClicked(viewHolder.itemView, picture, position)

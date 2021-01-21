@@ -28,7 +28,11 @@ class SingleTapHandler(
         gestureDetector.setOnDoubleTapListener(tapListener)
     }
 
-    override fun onTouch(v: View?, event: MotionEvent?) = gestureDetector.onTouchEvent(event)
+    override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+        if (event == null) return false
+
+        return gestureDetector.onTouchEvent(event)
+    }
 
     /**
      * Simple listener for single view taps.
