@@ -4,10 +4,7 @@ import android.content.Context
 import android.graphics.Rect
 import android.support.v4.view.PagerAdapter
 import android.util.DisplayMetrics
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.WindowManager
+import android.view.*
 import android.widget.Toast
 import kotlinx.android.synthetic.main.gallery_item.view.*
 import nl.nos.imagin.Imagin
@@ -41,7 +38,7 @@ class GalleryPagerAdapter : PagerAdapter() {
             .enableDoubleTapToZoom()
             .enablePinchToZoom()
             .enableSingleTap(object : SingleTapHandler.OnSingleTapListener {
-                override fun onSingleTap() {
+                override fun onSingleTap(event: MotionEvent) {
                     Toast.makeText(imageView.context, picture.name, Toast.LENGTH_SHORT).show()
                 }
             })
