@@ -94,7 +94,8 @@ class ScrollHandler(
                             imageView.translationX,
                             imageView.scaleX,
                             imageView.width,
-                            imageSize.first
+                            imageSize.first,
+                            event
                     )) {
                 outOfBoundScrolledListener?.invoke()
                 return consumed
@@ -104,7 +105,8 @@ class ScrollHandler(
                             imageView.translationY,
                             imageView.scaleY,
                             imageView.height,
-                            imageSize.second
+                            imageSize.second,
+                            event
                     )) {
                 outOfBoundScrolledListener?.invoke()
                 return consumed
@@ -165,12 +167,14 @@ class ScrollHandler(
      * Whether the listener should be triggered or not.
      */
     private fun shouldTriggerOutOfBoundListener(
-            distanceToClose: Int,
-            imageViewTranslation: Float,
-            imageViewScale: Float,
-            imageViewSize: Int,
-            imageSize: Int
+        distanceToClose: Int,
+        imageViewTranslation: Float,
+        imageViewScale: Float,
+        imageViewSize: Int,
+        imageSize: Int,
+        action: MotionEvent
     ): Boolean {
+        if (action.action == MotionEvent.ACTION_CANCEL) return false
         if (imageViewScale > 1f) return false
 
         val maxTranslation =
