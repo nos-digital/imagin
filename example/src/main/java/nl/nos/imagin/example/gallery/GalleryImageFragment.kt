@@ -4,10 +4,7 @@ import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
 import android.util.DisplayMetrics
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.WindowManager
+import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.gallery_item.*
@@ -60,7 +57,7 @@ class GalleryImageFragment : Fragment(), SingleTapHandler.OnSingleTapListener {
                 .enableDoubleTapToZoom()
                 .enablePinchToZoom()
                 .enableSingleTap(object : SingleTapHandler.OnSingleTapListener {
-                    override fun onSingleTap() {
+                    override fun onSingleTap(event: MotionEvent) {
                         Toast.makeText(image_view.context, picture.name, Toast.LENGTH_SHORT).show()
                     }
                 })
@@ -86,8 +83,8 @@ class GalleryImageFragment : Fragment(), SingleTapHandler.OnSingleTapListener {
         return Rect(0, 0, displayMetrics.widthPixels, displayMetrics.heightPixels).height()
     }
 
-    override fun onSingleTap() {
-        tapListener?.onSingleTap()
+    override fun onSingleTap(event: MotionEvent) {
+        tapListener?.onSingleTap(event)
     }
 
     companion object {
