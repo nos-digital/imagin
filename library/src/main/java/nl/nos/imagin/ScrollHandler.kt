@@ -4,6 +4,7 @@ import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
 import android.widget.ImageView
+import kotlin.math.abs
 
 /**
  * Allow the user to move the image of the image view when zoomed in.
@@ -37,9 +38,10 @@ class ScrollHandler(
                     distanceX: Float,
                     distanceY: Float
                 ): Boolean {
-                    if (imageView.rightEdgeIsVisible() && distanceX > 0 && moveMotionEvent?.pointerCount == 1) {
+                    val isScrollingVertically = isScrollingVertically(firstMotionEvent, moveMotionEvent)
+                    if (!isScrollingVertically && imageView.rightEdgeIsVisible() && distanceX > 0 && moveMotionEvent?.pointerCount == 1) {
                         imageView.parent?.requestDisallowInterceptTouchEvent(false)
-                    } else if (imageView.leftEdgeIsVisible() && distanceX < 0 && moveMotionEvent?.pointerCount == 1) {
+                    } else if (!isScrollingVertically && imageView.leftEdgeIsVisible() && distanceX < 0 && moveMotionEvent?.pointerCount == 1) {
                         imageView.parent?.requestDisallowInterceptTouchEvent(false)
                     }
 
@@ -65,9 +67,19 @@ class ScrollHandler(
                         )
                     }
 
-                    return super.onScroll(firstMotionEvent, moveMotionEvent, distanceX, distanceY)
+                    return true
                 }
             })
+
+    private fun isScrollingVertically(
+        firstMotionEvent: MotionEvent?,
+        moveMotionEvent: MotionEvent?
+    ): Boolean {
+        if (firstMotionEvent == null) return false
+        if (moveMotionEvent == null) return false
+
+        return abs(firstMotionEvent.y - moveMotionEvent.y) > abs(firstMotionEvent.x - moveMotionEvent.x)
+    }
 
     private fun ImageView.leftEdgeIsVisible(): Boolean {
         val maxTranslationXScale = (scaleX * width - width) / 2
