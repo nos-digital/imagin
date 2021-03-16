@@ -38,10 +38,7 @@ class ScrollHandler(
                     distanceX: Float,
                     distanceY: Float
                 ): Boolean {
-                    val isScrollingVertically = isScrollingVertically(firstMotionEvent, moveMotionEvent)
-                    if (!isScrollingVertically && imageView.rightEdgeIsVisible() && distanceX > 0 && moveMotionEvent?.pointerCount == 1) {
-                        imageView.parent?.requestDisallowInterceptTouchEvent(false)
-                    } else if (!isScrollingVertically && imageView.leftEdgeIsVisible() && distanceX < 0 && moveMotionEvent?.pointerCount == 1) {
+                    if (shouldAllowIntercept(firstMotionEvent, moveMotionEvent, distanceX)){
                         imageView.parent?.requestDisallowInterceptTouchEvent(false)
                     }
 
@@ -70,6 +67,23 @@ class ScrollHandler(
                     return true
                 }
             })
+
+    /**
+     * Return whether the parent should be able to intercept touch events.
+     */
+    private fun shouldAllowIntercept(
+        firstMotionEvent: MotionEvent?,
+        moveMotionEvent: MotionEvent?,
+        distanceX: Float
+    ): Boolean {
+        if (isScrollingVertically(firstMotionEvent, moveMotionEvent)) return false
+        if (moveMotionEvent?.pointerCount != 1) return false
+
+        if (imageView.rightEdgeIsVisible() && distanceX > 0) return true
+        if (imageView.leftEdgeIsVisible() && distanceX < 0) return true
+
+        return false
+    }
 
     private fun isScrollingVertically(
         firstMotionEvent: MotionEvent?,
