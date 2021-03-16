@@ -4,6 +4,7 @@ import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
 import android.widget.ImageView
+import kotlin.math.abs
 
 /**
  * Allow the user to move the image of the image view when zoomed in.
@@ -37,9 +38,7 @@ class ScrollHandler(
                     distanceX: Float,
                     distanceY: Float
                 ): Boolean {
-                    if (imageView.rightEdgeIsVisible() && distanceX > 0 && moveMotionEvent?.pointerCount == 1) {
-                        imageView.parent?.requestDisallowInterceptTouchEvent(false)
-                    } else if (imageView.leftEdgeIsVisible() && distanceX < 0 && moveMotionEvent?.pointerCount == 1) {
+                    if (shouldAllowIntercept(firstMotionEvent, moveMotionEvent, distanceX)){
                         imageView.parent?.requestDisallowInterceptTouchEvent(false)
                     }
 
@@ -65,9 +64,36 @@ class ScrollHandler(
                         )
                     }
 
-                    return super.onScroll(firstMotionEvent, moveMotionEvent, distanceX, distanceY)
+                    return true
                 }
             })
+
+    /**
+     * Return whether the parent should be able to intercept touch events.
+     */
+    private fun shouldAllowIntercept(
+        firstMotionEvent: MotionEvent?,
+        moveMotionEvent: MotionEvent?,
+        distanceX: Float
+    ): Boolean {
+        if (isScrollingVertically(firstMotionEvent, moveMotionEvent)) return false
+        if (moveMotionEvent?.pointerCount != 1) return false
+
+        if (imageView.rightEdgeIsVisible() && distanceX > 0) return true
+        if (imageView.leftEdgeIsVisible() && distanceX < 0) return true
+
+        return false
+    }
+
+    private fun isScrollingVertically(
+        firstMotionEvent: MotionEvent?,
+        moveMotionEvent: MotionEvent?
+    ): Boolean {
+        if (firstMotionEvent == null) return false
+        if (moveMotionEvent == null) return false
+
+        return abs(firstMotionEvent.y - moveMotionEvent.y) > abs(firstMotionEvent.x - moveMotionEvent.x)
+    }
 
     private fun ImageView.leftEdgeIsVisible(): Boolean {
         val maxTranslationXScale = (scaleX * width - width) / 2
@@ -94,7 +120,8 @@ class ScrollHandler(
                             imageView.translationX,
                             imageView.scaleX,
                             imageView.width,
-                            imageSize.first
+                            imageSize.first,
+                            event
                     )) {
                 outOfBoundScrolledListener?.invoke()
                 return consumed
@@ -104,7 +131,8 @@ class ScrollHandler(
                             imageView.translationY,
                             imageView.scaleY,
                             imageView.height,
-                            imageSize.second
+                            imageSize.second,
+                            event
                     )) {
                 outOfBoundScrolledListener?.invoke()
                 return consumed
@@ -165,12 +193,14 @@ class ScrollHandler(
      * Whether the listener should be triggered or not.
      */
     private fun shouldTriggerOutOfBoundListener(
-            distanceToClose: Int,
-            imageViewTranslation: Float,
-            imageViewScale: Float,
-            imageViewSize: Int,
-            imageSize: Int
+        distanceToClose: Int,
+        imageViewTranslation: Float,
+        imageViewScale: Float,
+        imageViewSize: Int,
+        imageSize: Int,
+        action: MotionEvent
     ): Boolean {
+        if (action.action == MotionEvent.ACTION_CANCEL) return false
         if (imageViewScale > 1f) return false
 
         val maxTranslation =
