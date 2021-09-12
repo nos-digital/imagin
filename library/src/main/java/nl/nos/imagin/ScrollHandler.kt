@@ -27,8 +27,6 @@ class ScrollHandler(
         private val outOfBoundScrolledListener: (() -> Unit)?
 ) : View.OnTouchListener {
 
-    private val calculator = Calculator()
-
     private val gestureDetector = GestureDetector(imageView.context,
             object : GestureDetector.SimpleOnGestureListener() {
 
@@ -113,7 +111,7 @@ class ScrollHandler(
         val consumed = gestureDetector.onTouchEvent(event)
 
         if (event.action == MotionEvent.ACTION_UP || event.action == MotionEvent.ACTION_CANCEL) {
-            val imageSize = calculator.calculateImageSize(imageView) ?: return consumed
+            val imageSize = Calculator.calculateImageSize(imageView) ?: return consumed
 
             if (allowScrollOutOfBoundsHorizontally && shouldTriggerOutOfBoundListener(
                             scrollDistanceToCloseInPx,
@@ -174,7 +172,7 @@ class ScrollHandler(
             currentTranslation: Float
     ): Float? {
         val maxTranslation =
-                calculator.calculateMaxTranslation(
+                Calculator.calculateMaxTranslation(
                         scale,
                         imageSize,
                         imageViewSize
@@ -204,7 +202,7 @@ class ScrollHandler(
         if (imageViewScale > 1f) return false
 
         val maxTranslation =
-                calculator.calculateMaxTranslation(imageViewScale, imageSize, imageViewSize)
+                Calculator.calculateMaxTranslation(imageViewScale, imageSize, imageViewSize)
         return imageViewTranslation < -(maxTranslation + distanceToClose) ||
                 imageViewTranslation > maxTranslation + distanceToClose
     }
