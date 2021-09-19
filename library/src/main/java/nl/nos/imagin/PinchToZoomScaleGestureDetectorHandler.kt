@@ -12,8 +12,6 @@ class PinchToZoomScaleGestureDetectorHandler(
         private val maxZoom: Float
 ) : ScaleGestureDetector.SimpleOnScaleGestureListener() {
 
-    private val calculator = Calculator()
-
     override fun onScale(detector: ScaleGestureDetector): Boolean {
         if (isMaxZoomedIn() && detector.scaleFactor >= 1f) {
             return true
@@ -24,7 +22,7 @@ class PinchToZoomScaleGestureDetectorHandler(
         // Don't let the object get too small or too large.
         scaleFactor = Math.max(minZoom, Math.min(scaleFactor, maxZoom))
 
-        val imageSize = calculator.calculateImageSize(imageView) ?: return false
+        val imageSize = Calculator.calculateImageSize(imageView) ?: return false
 
         imageView.translationX = calculateNewTranslationMinMaxed(
                 imageSize.first,
@@ -86,7 +84,7 @@ class PinchToZoomScaleGestureDetectorHandler(
             imageViewSize: Int
     ): Float {
         val maxTranslation =
-                calculator.calculateMaxTranslation(newImageScale, imageSize, imageViewSize)
+                Calculator.calculateMaxTranslation(newImageScale, imageSize, imageViewSize)
 
         // Never pinch out of the bounds
         return Math.max(-maxTranslation, Math.min(translation, maxTranslation))
@@ -100,8 +98,8 @@ class PinchToZoomScaleGestureDetectorHandler(
     ): Float {
         if (currentScale <= 1.0f) return 0f
 
-        return calculator.calculateMaxTranslation(newScale, imageViewSize, imageSize) /
-                calculator.calculateMaxTranslation(currentScale, imageViewSize, imageSize)
+        return Calculator.calculateMaxTranslation(newScale, imageViewSize, imageSize) /
+                Calculator.calculateMaxTranslation(currentScale, imageViewSize, imageSize)
     }
 
     /**
